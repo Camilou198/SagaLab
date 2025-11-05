@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 
 const app = express();
 app.use(express.json());
@@ -65,8 +64,8 @@ app.post('/validate', (req, res) => {
   const { hemoglobin, glucose } = patient;
 
   // Guardar que este paciente fue evaluado (para posible rollback)
-  checksPerformed.add(patient_id);
-
+  // Guardar que este paciente fue evaluado (para posible rollback)
+  checksPerformed.add(Number(patient_id));
   if (hemoglobin < 10) {
     return res.json({
       patient_id,
