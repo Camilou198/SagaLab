@@ -117,6 +117,70 @@ Simple endpoint for service health checks.
 
 <!-- Fin doctor-assign Service -->
 
+<!-- Inicio medicine Service -->
+
+# Medicine Service
+
+This service manages the reservation and cancellation of hospital medicines required for surgeries.
+
+## Endpoints
+
+---
+
+### **POST** `/reserve`
+
+Reserves the medicines required for a specific surgery type.
+
+**Logic:**
+- Validates the presence of `patient_id` and `surgery_type`
+- Checks if the specified surgery type has predefined medicine requirements
+- Verifies that all required medicines are available in the hospital inventory
+- Creates a reservation if all medicines are available
+- If the surgery type does not require special medicines, returns an informative message
+
+**Expected Response:**
+- Confirmation message of successful reservation
+- List of reserved medicines
+
+---
+
+### **POST** `/cancel`
+
+Cancels a medicine reservation for a patient.
+
+**Logic:**
+- Searches for an active reservation using `patient_id`
+- If a reservation exists, it is removed
+- Returns a confirmation message
+- If not found, returns a message indicating that no active reservation exists
+
+---
+
+### **GET** `/health`
+
+Simple endpoint for service health checks.
+
+**Purpose:**
+- Confirms that the container/service is running properly
+
+---
+
+## Summary
+
+| Endpoint     | Method | Description |
+|--------------|--------|-------------|
+| `/reserve`   | POST   | Reserves medicines required for a surgery |
+| `/cancel`    | POST   | Cancels an existing medicine reservation |
+| `/health`    | GET    | Health/heartbeat check |
+
+---
+
+## Notes
+- Handles medicine reservation and cancellation logic  
+- Ensures required medicines are available before surgeries  
+- Returns clear messages for both success and error cases  
+
+<!-- Fin medicine Service -->
 
 <!-- Inicio anesthesia Service -->
 
